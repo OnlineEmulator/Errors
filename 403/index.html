@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="CouldNotConnect.png" type="image/x-icon">
+
+    <style>
+        :root {
+            color-scheme: light dark;
+
+            --background: #fff;
+            --text: rgb(32, 33, 36);
+            --secondary: rgb(95, 99, 104);
+
+            --button: rgb(26, 115, 232);
+            --button-hover: rgb(25, 103, 210);
+            --button-text: #fff;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background: rgb(32, 33, 36);
+                --text: rgb(154, 160, 166);
+                --secondary: rgb(154, 160, 166);
+
+                --button: rgb(138, 180, 248);
+                --button-hover: rgb(129, 162, 208);
+                --button-text: rgb(32, 33, 36);
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--background);
+            color: var(--text);
+
+            font-family:
+                "Google Sans",
+                "Product Sans",
+                "Segoe UI",
+                Roboto,
+                Arial,
+                sans-serif;
+        }
+
+        .error-page {
+            width: 600px;
+            max-width: calc(100% - 40px);
+            margin: 120px auto 0;
+        }
+
+        .icon {
+            width: 72px;
+            height: 72px;
+            object-fit: contain;
+            margin-bottom: 32px;
+        }
+
+        h1 {
+            margin: 0 0 18px;
+
+            font-size: 28px;
+            line-height: 36px;
+            font-weight: 400;
+            letter-spacing: 0;
+        }
+
+        p {
+            margin: 0 0 24px;
+
+            color: var(--secondary);
+            font-size: 15px;
+            line-height: 24px;
+            font-weight: 400;
+        }
+
+        .details {
+            margin-bottom: 32px;
+
+            color: var(--secondary);
+            font-size: 13px;
+            line-height: 20px;
+        }
+
+        .details strong {
+            font-weight: 500;
+        }
+
+        .reload {
+            border: none;
+            border-radius: 20px;
+
+            padding: 10px 24px;
+
+            background: var(--button);
+            color: var(--button-text);
+
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 500;
+
+            cursor: pointer;
+
+            transition:
+                background 0.15s,
+                box-shadow 0.15s;
+        }
+
+        .reload:hover {
+            background: var(--button-hover);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+        }
+
+        .reload:active {
+            box-shadow: none;
+        }
+
+        @media (max-width: 650px) {
+            .error-page {
+                margin-top: 60px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="error-page">
+
+        <img
+            class="icon"
+            src="Icon.png"
+            alt=""
+            id="img"
+        >
+
+        <h1>This site refused connection</h1>
+
+        <p>
+            The webpage URL is invalid, temporarily down or non existant.
+        </p>
+
+        <div class="details">
+            <strong>403</strong>: Forbidden
+        </div>
+
+        <button class="reload" onclick="history.back()">
+            Go back
+        </button>
+
+    </main>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const url = params.get("url"); 
+
+        if (url !== null) {
+            document.title = url;
+        }
+
+        const str = location.href
+
+        const result = str.replace(/(\/Errors\/).*/, "$1icon.png");
+
+        document.getElementById("img").src = result;
+    </script>
+
+</body>
+</html>
